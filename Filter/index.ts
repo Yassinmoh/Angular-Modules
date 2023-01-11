@@ -10,6 +10,18 @@ set listFilter(value : string){
     this.performFilter(this._listFilter)
 }
 
+//ViewChild way:
+
+@ViewChild(NgModel) filter!:NgModel
+
+ngAfterViewInit(): void {
+  this.filter.valueChanges?.subscribe(()=>{
+    this.performFilter(this.listFilter)
+  })
+}
+
+
+
 performFilter(filterBy ?: string): void {
     if(filterBy) {
         this.filteredProducts = this.products.filter(product =>
